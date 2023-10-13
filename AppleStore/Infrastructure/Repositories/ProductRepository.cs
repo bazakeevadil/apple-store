@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Repositories;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
@@ -13,38 +14,47 @@ public class ProductRepository : IProductRepository
         _context = context;
     }
 
-    public Task CreateAsync(Product entity)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<bool> DeleteAsync(params string[] name)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<bool> DeleteAsync(params Guid[] Id)
-    {
-        throw new NotImplementedException();
-    }
-
     public Task<List<Product>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return _context.Products.AsNoTracking().ToListAsync();
     }
 
-    public Task<Product> GetProductByIdAsync(Guid id)
+    public async Task<Product?> GetProductByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var entity = await _context.Products.FindAsync(id);
+
+        if (entity != null)
+            _context.Entry(entity).State = EntityState.Detached;
+
+        return entity;
     }
 
-    public Task<Product> GetProductByName(string name)
+    public Task<Product?> GetProductByName(string name)
     {
-        throw new NotImplementedException();
+        return _context.Products.AsNoTracking()
+            .FirstOrDefaultAsync(p => p.Name == name);
     }
 
     public void Update(Product entity)
     {
-        throw new NotImplementedException();
+        _context.Products.Update(entity);
+    }
+
+    public void Create(Product entity)
+    {
+        _context.Products.Add(entity);
+    }
+
+    public void DeleteByNameAsync(Product entity)
+    {
+        _context.Products.Remove(entity);
+    }
+
+    public async Task DeleteByIdAsync(params Guid[] id)
+    {
+        var entity = await _context.Products.FindAsync(id);
+
+        if (entity != null)
+            _context.Products.Remove(entity);
     }
 }

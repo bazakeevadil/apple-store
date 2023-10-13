@@ -1,5 +1,7 @@
 ﻿using Application.Shared;
+using Domain.Repositories;
 using Infrastructure.Data;
+using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +19,7 @@ public static class DependencyInjection
                 configuration.GetConnectionString("SqlConnection")));
 
         services.AddTransient<IUnitOfWork, UnitOfWork>();
+        services.AddTransient<IProductRepository, ProductRepository>();
 
         return services;
     }

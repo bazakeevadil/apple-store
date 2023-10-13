@@ -5,7 +5,7 @@ namespace Domain.Entities;
 
 public class Product
 {
-    public Guid ProductId { get; set; }
+    public Guid Id { get; set; }
 
     [DisplayName("Название продукта")]
     [Required(ErrorMessage = "{0} является обязательным полем")]

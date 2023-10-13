@@ -5,7 +5,7 @@ namespace Domain.Entities;
 
 public class Category
 {
-    public Guid CategoryId { get; set; }
+    public Guid Id { get; set; }
 
     [DisplayName("Название категории продукта")]
     [Required(ErrorMessage = "{0} является обязательным полем")]

@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Application.Shared;
+using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure;
@@ -9,7 +12,11 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.AddDbContext<>();
+        services.AddDbContext<AppDbContext>(opts =>
+            opts.UseSqlServer(
+                configuration.GetConnectionString("SqlConnection")));
+
+        services.AddTransient<IUnitOfWork, UnitOfWork>();
 
         return services;
     }

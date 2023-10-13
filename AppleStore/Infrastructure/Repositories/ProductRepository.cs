@@ -19,7 +19,7 @@ public class ProductRepository : IProductRepository
         return _context.Products.AsNoTracking().ToListAsync();
     }
 
-    public async Task<Product?> GetProductByIdAsync(Guid id)
+    public async Task<Product?> GetByIdAsync(Guid id)
     {
         var entity = await _context.Products.FindAsync(id);
 
@@ -29,7 +29,7 @@ public class ProductRepository : IProductRepository
         return entity;
     }
 
-    public Task<Product?> GetProductByName(string name)
+    public Task<Product?> GetByName(string name)
     {
         return _context.Products.AsNoTracking()
             .FirstOrDefaultAsync(p => p.Name == name);

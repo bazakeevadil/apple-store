@@ -1,5 +1,6 @@
 using Application;
 using Infrastructure;
+using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Repositories
+namespace Application.Features.Categories.Commands
 {
-    internal class CategoryRepositories
+    internal class DeleteById
     {
     }
 }

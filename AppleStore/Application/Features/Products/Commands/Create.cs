@@ -19,9 +19,9 @@ internal class CreateProductCommandHandler
     private readonly IProductRepository _productRepository;
     private readonly IUnitOfWork _uow;
 
-    public CreateProductCommandHandler(IProductRepository bookRepository, IUnitOfWork uow)
+    public CreateProductCommandHandler(IProductRepository productRepository, IUnitOfWork uow)
     {
-        _productRepository = bookRepository;
+        _productRepository = productRepository;
         _uow = uow;
     }
 
